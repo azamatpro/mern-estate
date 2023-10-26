@@ -32,7 +32,7 @@ export const signin = async (req, res, next) => {
   }
 };
 
-// =======>> Google api route
+// =======>> Sign in & up with Google api route
 export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -57,6 +57,17 @@ export const google = async (req, res, next) => {
       const { password: pass, ...rest } = newUser._doc;
       res.cookie("access_token", token, { httpOnly: true }).status(200).json(rest);
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Sign Out api
+
+export const signOut = async (req, res, next) => {
+  try {
+    res.clearCookie("access_token");
+    res.status(200).json("User has been logged out!");
   } catch (error) {
     next(error);
   }
