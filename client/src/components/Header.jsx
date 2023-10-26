@@ -32,7 +32,7 @@ export default function Header() {
             {currentUser ? (
               <img
                 className='w-7 h-7 rounded-full object-cover'
-                src={currentUser.avatar}
+                src={currentUser?.avatar}
                 alt='Profile'
               />
             ) : (
